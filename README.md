@@ -1,9 +1,11 @@
 # WAT
 
-Simple way of running wordpress through docker:
+This boileplate focuses on provoding a simple, less technical way to run wordpress on docker
 
  - using official wordpress image and adding the `wp-cli` to it
 
+The usual workflows using `composer` and things like that are not included here to reduce the complexity of this
+boilerplate for the audience.
 
 # Usage
 
@@ -11,9 +13,13 @@ Simple way of running wordpress through docker:
 
 ```
 docker-compose up
+
+# or
+
+./start.sh
 ```
 
-Now connect to `localhost:80` or whatever you like
+That's it - now connect to `localhost:80` or whatever you like
 
 # Data
 
