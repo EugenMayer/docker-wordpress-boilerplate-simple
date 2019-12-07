@@ -4,7 +4,11 @@ services:
    wordpress:
      depends_on:
        - db
-     image: wordpress:latest
+    # you can use either of this, eugenmayer/wordpress includes the wp-cli
+     #image: wordpress:latest
+     image: eugenmayer/wordpress:lastest
+     build:
+       context: ./
      volumes:
        - ./data/wordpress_files:/var/www/html
        - ./data/backups:/backups

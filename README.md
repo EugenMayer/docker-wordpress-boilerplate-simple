@@ -31,3 +31,22 @@ A host-mount is used to simplify the workflow for most users ( e.g. adding a cus
 
 ### Database
 The database is located in the named volume `db-data`
+
+# Advanced
+
+## using the official image
+
+If you want to use the official image instead of `eugenmayer/wordpress` ( see below) just replace the `image:` in the 
+`docker-compose.yml` with `wordpress:latest` (uncomment it)
+## Building the custom image
+
+The optional docker image `eugenmayer/wordpress` does add the wordpress-cli `wp-cli` to the image, but is based on the
+official `wordpress:latest` image. If you want to rebuild it
+
+```
+make build
+
+# or
+docker-compose build
+```
+
