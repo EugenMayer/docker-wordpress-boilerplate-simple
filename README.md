@@ -1,12 +1,12 @@
 # WAT
 
-This boileplate focuses on provoding a simple, less technical way to run wordpress on docker
+This boilerplate focuses on providing a simple, less technical way to run wordpress on docker
 
  - using official wordpress image and adding the `wp-cli` to it
 
 This image can be used for production or running it locally for development.
 
-The usual workflows using `composer` and things like that are not included here to reduce the complexity of this
+The usual workflow using `composer` and things like that are not included here to reduce the complexity of this
 boilerplate for the audience.
 
 # Usage
