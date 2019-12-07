@@ -50,3 +50,24 @@ make build
 docker-compose build
 ```
 
+## Using wp-cli
+
+The important thing is to run it under the `www-data` user
+
+```
+./wp-cli,sh
+
+# or
+docker-compose exec -u www-data  wordpress bash
+
+# or 
+
+docker exec -it -u www-data <wordpress-container> bash
+```
+
+Or you can fire up the commands directly
+
+```bash
+./wp-cli.sh info
+./wp-cli.sh user update --user_pass=123 Admin
+```
