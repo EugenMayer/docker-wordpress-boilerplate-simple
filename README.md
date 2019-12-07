@@ -23,6 +23,15 @@ That's it - now connect to `localhost:80` or whatever you like
 
 # Data
 
+### Update
+
+This will update the wordpress / mysql image and restart your stack if there have been any. This will never delete
+any of your data, plugins, themes or database ( what so ever )
+```
+docker-compose pull
+./start.sh
+```
+
 ### Wordpress, assets, plugins, themes
 You wordpress data is mounted to a host-mount under `data/wordpress_files` ( which are excluded from this git repo )
 There you find your wordpress installation including all plugins,themes and assets
@@ -68,6 +77,6 @@ docker exec -it -u www-data <wordpress-container> bash
 Or you can fire up the commands directly
 
 ```bash
-./wp-cli.sh info
+./wp-cli.sh cli version
 ./wp-cli.sh user update --user_pass=123 Admin
 ```
