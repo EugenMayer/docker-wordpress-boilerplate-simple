@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  wordpress:
+    labels:
+      traefik.http.routers.wordpress.rule: "Host(`${WORDPRESS_DOMAIN}`)"
+      traefik.http.routers.wordpress.tls: "true"
+      traefik.http.routers.wordpress.tls.certresolver: "default"
+  # see https://github.com/EugenMayer/docker-image-traefik
+  traefik:
+    image: eugenmayer/traefik:2.x
+    ports:
+      - 80:8080
+      - 443:8443
+    environment:
+      ####  those are the mandatory ACME variables
+      TRAEFIK_ACME_ENABLE: 'true'
+      TRAEFIK_ACME_CHALLENGE: 'dns'
+      TRAEFIK_ACME_CHALLENGE_DNS_PROVIDER: "${TRAEFIK_ACME_CHALLENGE_DNS_PROVIDER}"
+      TRAEFIK_ACME_CHALLENGE_DNS_CREDENTIALS: "${TRAEFIK_ACME_CHALLENGE_DNS_CREDENTIALS}"
+
+      ### basic provider setup
+      TRAEFIK_HTTPS_ENABLE: 'only'
+      TRAEFIK_DOCKER_ENABLE: 'true'
+    volumes:
+      - certs:/mnt/certs
+      - filestorage:/mnt/filestorage
+      - acme:/mnt/acme
+      # mount our docker socket so our docker container can be discovered
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  certs:
+  filestorage:
+  acme:

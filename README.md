@@ -13,6 +13,13 @@ boilerplate for the audience.
 
 - create a `.env` file and add `DB_PW=<secret>` to it, so you have a mysql password set
 
+`.env`
+```
+DB_PW=somepassword
+```
+
+Now
+
 ```
 docker-compose up
 
@@ -21,7 +28,7 @@ docker-compose up
 ./start.sh
 ```
 
-That's it - now connect to `localhost:80` or whatever you like
+That's it - now connect to `localhost:81` or whatever you like
 
 # Data
 
@@ -44,6 +51,37 @@ A host-mount is used to simplify the workflow for most users ( e.g. adding a cus
 The database is located in the named volume `db-data`
 
 # Advanced
+
+## SSL
+
+To be able to run wordpress behind SSL using LetsEncrypt without any big effort, you can use the `traefik` integration.
+
+The easiest way for starters is using the `-http` variant. You will need 1 more variables to your `.env` file
+
+`.env`
+```
+DB_PW=<youdbpw>
+WORDPRESS_DOMAIN=mywordpress.de
+```
+
+
+```
+docker-compose -f docker-compose.yml -f docker-compose-traefik-http.yml up
+```
+
+Or for the DNS-01 variant you will need to add another 2 variables (this example is for cloudflare)
+
+`.env`
+```
+DB_PW=<youdbpw>
+WORDPRESS_DOMAIN=mywordpress.de
+TRAEFIK_ACME_CHALLENGE_DNS_PROVIDER=cloudflare
+TRAEFIK_ACME_CHALLENGE_DNS_CREDENTIALS=CF_DNS_API_TOKEN=<YOURTOKEN>
+```
+
+```
+docker-compose -f docker-compose.yml -f docker-compose-traefik-dns.yml up
+```
 
 ## using the official image
 

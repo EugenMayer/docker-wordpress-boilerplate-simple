@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  traefik:
+    environment:
+      TRAEFIK_ADMIN_ENABLE: 'true'
+      TRAEFIK_ADMIN_SSL: 'true'
+      # use the staging server
+      TRAEFIK_ACME_CASERVER: "https://acme-staging-v02.api.letsencrypt.org/directory"
+volumes:
+  certs:
+  filestorage:
+  acme:
