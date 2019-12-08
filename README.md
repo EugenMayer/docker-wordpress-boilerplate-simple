@@ -4,7 +4,8 @@ This boilerplate focuses on providing a simple, less technical way to run wordpr
 
  - using official wordpress image and adding the `wp-cli` to it
 
-This image can be used for production or running it locally for development.
+This image can be used for production or running it locally for development. You can easily also start it with an ### HTTP-01 (start here)
+Let's Encrypt SSL** support right away.
 
 The usual workflow using `composer` and things like that are not included here to reduce the complexity of this
 boilerplate for the audience.
@@ -54,6 +55,7 @@ The database is located in the named volume `db-data`
 
 ## SSL
 
+#### HTTP-01 (start here)
 To be able to run wordpress behind SSL using LetsEncrypt without any big effort, you can use the `traefik` integration.
 
 The easiest way for starters is using the `-http` variant. You will need 1 more variables to your `.env` file
@@ -71,6 +73,8 @@ docker-compose -f docker-compose.yml -f docker-compose-traefik-http.yml up
 Now you can already connect using `https://mywordpress.de` and in addition requests to `http://mywordpress.de` are already
 redirected to `https://mywordpress.de` automatically. Neat
 
+#### DNS-01 (alternative)
+
 Or for the DNS-01 variant you will need to add another 2 variables (this example is for cloudflare)
 
 `.env`
@@ -85,12 +89,12 @@ TRAEFIK_ACME_CHALLENGE_DNS_CREDENTIALS=CF_DNS_API_TOKEN=<YOURTOKEN>
 docker-compose -f docker-compose.yml -f docker-compose-traefik-dns.yml up
 ```
 
-## using the official image
+## Official image
 
 If you want to use the official image instead of `eugenmayer/wordpress` ( see below) just replace the `image:` in the 
 `docker-compose.yml` with `wordpress:latest` (uncomment it)
 
-## Building the custom image
+## Building your own custom image
 
 The optional docker image `eugenmayer/wordpress` does add the wordpress-cli `wp-cli` to the image, but is based on the
 official `wordpress:latest` image. If you want to rebuild it
