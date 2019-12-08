@@ -64,10 +64,12 @@ DB_PW=<youdbpw>
 WORDPRESS_DOMAIN=mywordpress.de
 ```
 
-
 ```
 docker-compose -f docker-compose.yml -f docker-compose-traefik-http.yml up
 ```
+
+Now you can already connect using `https://mywordpress.de` and in addition requests to `http://mywordpress.de` are already
+redirected to `https://mywordpress.de` automatically. Neat
 
 Or for the DNS-01 variant you will need to add another 2 variables (this example is for cloudflare)
 
