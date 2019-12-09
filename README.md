@@ -4,8 +4,8 @@ This boilerplate focuses on providing a simple, less technical way to run wordpr
 
  - using official wordpress image and adding the `wp-cli` to it
 
-This image can be used for production or running it locally for development. You can easily also start it with an ### HTTP-01 (start here)
-Let's Encrypt SSL** support right away.
+This image can be used for **production** or running it locally for development. 
+You can easily also start it with an **Let's Encrypt SSL** support right away.
 
 The usual workflow using `composer` and things like that are not included here to reduce the complexity of this
 boilerplate for the audience.
