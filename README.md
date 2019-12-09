@@ -12,7 +12,7 @@ boilerplate for the audience.
 
 # Usage
 
-- create a `.env` file and add `DB_PW=<secret>` to it, so you have a mysql password set
+- create a file `.env`  add put `DB_PW=<secret>` to it, so you have a mysql password set
 
 `.env`
 ```
@@ -126,4 +126,5 @@ Or you can fire up the commands directly
 ```bash
 ./wp-cli.sh cli version
 ./wp-cli.sh user update --user_pass=123 Admin
+./wp-cli.sh migratedb find-replace --find='http://stagin-site.com' --replace='https://production-site.com'
 ```

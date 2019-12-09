@@ -6,7 +6,7 @@ services:
        - db
     # you can use either of this, eugenmayer/wordpress includes the wp-cli
      #image: wordpress:latest
-     image: eugenmayer/wordpress:lastest
+     image: eugenmayer/wordpress:latest
      build:
        context: ./
      volumes:
