@@ -38,7 +38,16 @@ That's it - now connect to `localhost:81` or whatever you like
 
 This will update the wordpress / mysql image and restart your stack if there have been any. This will never delete
 any of your data, plugins, themes or database ( what so ever )
+
+just run
+
+```bash
+./update.sh
 ```
+
+or mannually
+
+```bash
 docker-compose pull
 ./start.sh
 ```
