@@ -3,6 +3,7 @@
 This boilerplate focuses on providing a simple, less technical way to run wordpress on docker
 
  - using official wordpress image and adding the `wp-cli` to it
+ - higher upload limit ( 64MB ) out of the box
 
 This image can be used for **production** or running it locally for development. 
 You can easily also start it with an **Let's Encrypt SSL** support right away.
@@ -128,3 +129,33 @@ Or you can fire up the commands directly
 ./wp-cli.sh user update --user_pass=123 Admin
 ./wp-cli.sh migratedb find-replace --find='http://stagin-site.com' --replace='https://production-site.com'
 ```
+
+## Custom configuration
+
+- create a folder called `config/` - e.g. add a "mycustom.ini" with the content you need inside that folder
+- create a filder called `config/docker-compose-overrides.yml` and put something like this inside
+
+```yaml
+version: "3.3"
+
+services:
+  wordpress:
+    volumes:
+      - ./config/mycustom.ini:/usr/local/etc/php/conf.d/mycustom.ini
+```
+
+You can mount any configuration you need, whatever you like or need to be changed
+
+- no edit your `.env` file and set this
+
+```
+COMPOSE_FILE=docker-compose.yml:config/docker-compose-overrides.yml
+```
+
+Now just start your stack again
+
+```
+docker-compose up -d
+```
+
+And it's now all you need

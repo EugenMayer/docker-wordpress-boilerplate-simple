@@ -7,5 +7,7 @@ RUN apt-get update \
  && chmod +x wp-cli.phar \
  && mv wp-cli.phar /usr/local/bin/wp
 
+# higher upload limit
+COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
 

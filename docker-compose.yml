@@ -4,9 +4,9 @@ services:
    wordpress:
      depends_on:
        - db
-    # you can use either of this, eugenmayer/wordpress includes the wp-cli
+     # you can use either of this, eugenmayer/wordpress includes the wp-cli
      #image: wordpress:latest
-     image: :
+     image: eugenmayer/wordpress
      build:
        context: ./
      volumes:
