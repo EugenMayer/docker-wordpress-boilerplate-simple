@@ -25,13 +25,14 @@ services:
       - ./data/site2/backups:/backups
     restart: always
     labels:
-      traefik.http.routers.wordpress.rule: "Host(`${WORDPRESS_SITE2_DOMAIN}`)"
-      traefik.http.routers.wordpress.tls: "true"
-      traefik.http.routers.wordpress.tls.certresolver: "default"
+      traefik.http.routers.wordpress_site2.rule: "Host(`${WORDPRESS_SITE2_DOMAIN}`)"
+      traefik.http.routers.wordpress_site2.tls: "true"
+      traefik.http.routers.wordpress_site2.tls.certresolver: "default"
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: ${DB_PW}
+      WORDPRESS_DB_NAME: site2
  ```
 
 Now add the domain to your `.env` file and also add our override as i explained in `README.md`
@@ -53,6 +54,8 @@ If you plan adding a third site even - simple enough.
 Repeat the steps above creating `config/docker-compose-site3.yml`,
  - just call the service `wordpress-site3`,
  - the volume folder `site3` 
+ - change the label path from `traefik.http.routers.wordpress_site2..` to `traefik.http.routers.wordpress_site3..`
+ - change the `WORDPRESS_DB_NAME: site2` to `WORDPRESS_DB_NAME: site3`
  - and the env file `WORDPRESS_SITE_3_DOMAIN` ..
 
 you get it. Then put this in your `.env` file

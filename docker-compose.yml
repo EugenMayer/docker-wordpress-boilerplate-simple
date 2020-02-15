@@ -27,7 +27,7 @@ services:
        - ./data/site1/backups:/backups
      restart: always
      environment:
-       MYSQL_ROOT_PASSWORD: my_db_root_password
+       MYSQL_ROOT_PASSWORD: {DB_ROOT_PW}
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: ${DB_PW} 

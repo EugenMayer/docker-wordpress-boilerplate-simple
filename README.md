@@ -28,6 +28,8 @@ mv ./data/wordpress_files ./data/site1/
 mv ./data/backups ./data/site1/
 ```
 
+And also set the `DB_ROOT_PW=<yourmysqlrootpw>` in your `.env`
+
 # Usage
 
 - create a file `.env`  add put `DB_PW=<secret>` to it, so you have a mysql password set
@@ -90,6 +92,7 @@ The easiest way for starters is using the `-http` variant. You will need 1 more 
 `.env`
 ```
 DB_PW=<youdbpw>
+DB_ROOT_PW=<yourmysqlrootpw>
 WORDPRESS_DOMAIN=mywordpress.de
 ```
 
