@@ -13,22 +13,25 @@ This boilerplate will support you installing multiple wordpress sites in one sta
 `vim config/docker-compose-site2.yml`
 
 ```yaml
-wordpress-site2:
-  depends_on:
-    - db
-  image: eugenmayer/wordpress
-  volumes:
-    - ./data/site2/wordpress_files:/var/www/html
-    - ./data/site2/backups:/backups
-  restart: always
-  labels:
-    traefik.http.routers.wordpress.rule: "Host(`${WORDPRESS_SITE_2_DOMAIN}`)"
-    traefik.http.routers.wordpress.tls: "true"
-    traefik.http.routers.wordpress.tls.certresolver: "default"
-  environment:
-    WORDPRESS_DB_HOST: db:3306
-    WORDPRESS_DB_USER: wordpress
-    WORDPRESS_DB_PASSWORD: ${DB_PW}
+version: "3.3"
+
+services:
+  wordpress-site2:
+    depends_on:
+      - db
+    image: eugenmayer/wordpress
+    volumes:
+      - ./data/site2/wordpress_files:/var/www/html
+      - ./data/site2/backups:/backups
+    restart: always
+    labels:
+      traefik.http.routers.wordpress.rule: "Host(`${WORDPRESS_SITE2_DOMAIN}`)"
+      traefik.http.routers.wordpress.tls: "true"
+      traefik.http.routers.wordpress.tls.certresolver: "default"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PW}
  ```
 
 Now add the domain to your `.env` file and also add our override as i explained in `README.md`
@@ -41,7 +44,7 @@ WORDPRESS_DOMAIN=firssite.com
 WORDPRESS_SITE_2_DOMAIN=secondsite.com
 ```
 
-You might want to change `docker-compose-traefik-http.yaml` to `docker-compose-traefik-dns.yaml` if you used `DNS-01`
+You might want to change `docker-compose-traefik-http.yml` to `docker-compose-traefik-dns.yml` if you used `DNS-01`
 
 ## Adding a third side
 

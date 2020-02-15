@@ -25,7 +25,7 @@ With the latest "multi-site" update you need to move you data from
 ```bash
 mkdir -p ./data/site1
 mv ./data/wordpress_files ./data/site1/
-mv ./data/backup ./data/site1/
+mv ./data/backups ./data/site1/
 ```
 
 # Usage
