@@ -10,8 +10,8 @@ services:
      build:
        context: ./
      volumes:
-       - ./data/wordpress_files:/var/www/html
-       - ./data/backups:/backups
+       - ./data/site1/wordpress_files:/var/www/html
+       - ./data/site1/backups:/backups
      ports:
        - "81:80"
      restart: always
@@ -24,7 +24,7 @@ services:
      image: mysql:5.7
      volumes:
        - db_data:/var/lib/mysql
-       - ./data/backups:/backups
+       - ./data/site1/backups:/backups
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: my_db_root_password

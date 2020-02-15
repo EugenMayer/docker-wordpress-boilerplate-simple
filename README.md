@@ -6,6 +6,7 @@ This boilerplate focuses on providing a simple, less technical way to run wordpr
  - higher upload limit ( 64MB ) out of the box
  - having a securet setup with SSL
  - simple to upgrade and maintain
+ - run several wordpress sites in a non-multisite but multi-FPM - but easy with Traefik
 
 This image can be used for **production** or running it locally for development. 
 You can easily also start it with an **Let's Encrypt SSL** support right away.
@@ -13,11 +14,25 @@ You can easily also start it with an **Let's Encrypt SSL** support right away.
 The usual workflow using `composer` and things like that are not included here to reduce the complexity of this
 boilerplate for the audience.
 
+
+# UPGRADE
+
+With the latest "multi-site" update you need to move you data from 
+ - `./data/wordpress_files` to `./data/site1/wordpress_files`
+ - `./data/backup` to `./data/site1/backup`
+
+
+```bash
+mkdir -p ./data/site1
+mv ./data/wordpress_files ./data/site1/
+mv ./data/backup ./data/site1/
+```
+
 # Usage
 
 - create a file `.env`  add put `DB_PW=<secret>` to it, so you have a mysql password set
 
-`.env`
+`vim .env`
 ```
 DB_PW=somepassword
 ```
@@ -55,7 +70,7 @@ docker-compose pull
 ```
 
 ### Wordpress, assets, plugins, themes
-You wordpress data is mounted to a host-mount under `data/wordpress_files` ( which are excluded from this git repo )
+You wordpress data is mounted to a host-mount under `data/site1/wordpress_files` ( which are excluded from this git repo )
 There you find your wordpress installation including all plugins,themes and assets
 
 A host-mount is used to simplify the workflow for most users ( e.g. adding a custom theme or similar )
@@ -170,3 +185,10 @@ docker-compose up -d
 ```
 
 That is all all you need
+
+
+## Multisite
+
+For running several wordpress instances in the same stack but in different FPM container
+
+see `README.multisite.md
