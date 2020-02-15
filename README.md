@@ -121,7 +121,7 @@ docker-compose build wordpress
 The important thing is to run it under the `www-data` user
 
 ```
-./wp-cli,sh
+./wp-cli.sh
 
 # or
 docker-compose exec -u www-data  wordpress bash
@@ -167,4 +167,4 @@ Now just start your stack again
 docker-compose up -d
 ```
 
-And it's now all you need
+That is all all you need
