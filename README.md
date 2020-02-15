@@ -4,6 +4,8 @@ This boilerplate focuses on providing a simple, less technical way to run wordpr
 
  - using official wordpress image and adding the `wp-cli` to it
  - higher upload limit ( 64MB ) out of the box
+ - having a securet setup with SSL
+ - simple to upgrade and maintain
 
 This image can be used for **production** or running it locally for development. 
 You can easily also start it with an **Let's Encrypt SSL** support right away.
