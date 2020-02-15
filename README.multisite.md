@@ -35,6 +35,17 @@ services:
       WORDPRESS_DB_NAME: site2
  ```
 
+Now connect to your database to create a new database
+
+```bash
+docker-compose exec db bash
+# use your mysql root password
+mysql -p
+# use your DB password here ( not root db password)
+grant all on site2.* to wordpress identified by '<>'
+flush privileges
+```
+
 Now add the domain to your `.env` file and also add our override as i explained in `README.md`
 
 `vim .env`
@@ -51,11 +62,13 @@ You might want to change `docker-compose-traefik-http.yml` to `docker-compose-tr
 
 If you plan adding a third site even - simple enough.
 
-Repeat the steps above creating `config/docker-compose-site3.yml`,
+Repeat the steps above creating `config/docker-compose-site3.yml`
+
  - just call the service `wordpress-site3`,
  - the volume folder `site3` 
  - change the label path from `traefik.http.routers.wordpress_site2..` to `traefik.http.routers.wordpress_site3..`
  - change the `WORDPRESS_DB_NAME: site2` to `WORDPRESS_DB_NAME: site3`
+ - create the database `site3` with the credentials
  - and the env file `WORDPRESS_SITE_3_DOMAIN` ..
 
 you get it. Then put this in your `.env` file
