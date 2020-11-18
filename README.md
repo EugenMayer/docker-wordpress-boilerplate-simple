@@ -14,21 +14,7 @@ You can easily also start it with an **Let's Encrypt SSL** support right away.
 The usual workflow using `composer` and things like that are not included here to reduce the complexity of this
 boilerplate for the audience.
 
-
-# UPGRADE
-
-With the latest "multi-site" update you need to move you data from 
- - `./data/wordpress_files` to `./data/site1/wordpress_files`
- - `./data/backup` to `./data/site1/backup`
-
-
-```bash
-mkdir -p ./data/site1
-mv ./data/wordpress_files ./data/site1/
-mv ./data/backups ./data/site1/
-```
-
-And also set the `DB_ROOT_PW=<yourmysqlrootpw>` in your `.env`
+This git repo has been setup a way so you can pull it to update the repo without losing any data, configuration or setup. So you can update your "stack management"
 
 # Usage
 
@@ -91,13 +77,16 @@ The easiest way for starters is using the `-http` variant. You will need 1 more 
 
 `.env`
 ```
+# this is needed to enable the extra traefik service
+COMPOSE_FILE=docker-compose.yml:docker-compose-traefik-http.yml
 DB_PW=<youdbpw>
 DB_ROOT_PW=<yourmysqlrootpw>
+# add your domain
 WORDPRESS_DOMAIN=mywordpress.de
 ```
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose-traefik-http.yml up
+docker-compose up
 ```
 
 Now you can already connect using `https://mywordpress.de` and in addition requests to `http://mywordpress.de` are already
@@ -109,14 +98,17 @@ Or for the DNS-01 variant you will need to add another 2 variables (this example
 
 `.env`
 ```
+# this is needed to enable the extra traefik service
+COMPOSE_FILE=docker-compose.yml:docker-compose-traefik-dns.yml
 DB_PW=<youdbpw>
+# Be sure to add your domain
 WORDPRESS_DOMAIN=mywordpress.de
 TRAEFIK_ACME_CHALLENGE_DNS_PROVIDER=cloudflare
 TRAEFIK_ACME_CHALLENGE_DNS_CREDENTIALS=CF_DNS_API_TOKEN=<YOURTOKEN>
 ```
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose-traefik-dns.yml up
+docker-compose up
 ```
 
 ## Official image
@@ -175,19 +167,19 @@ services:
 
 You can mount any configuration you need, whatever you like or need to be changed
 
-- no edit your `.env` file and set this
+- now edit your `.env` file and set this
 
 ```
 COMPOSE_FILE=docker-compose.yml:config/docker-compose-overrides.yml
 ```
 
-Now just start your stack again
+Now just start your stack again.
 
 ```
 docker-compose up -d
 ```
 
-That is all all you need
+That is all all you need.
 
 
 ## Multisite
