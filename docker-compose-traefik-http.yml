@@ -3,9 +3,10 @@ version: '3.3'
 services:
   wordpress:
     labels:
-      traefik.http.routers.wordpress.rule: "Host(`${WORDPRESS_DOMAIN}`)"
-      traefik.http.routers.wordpress.tls: "true"
-      traefik.http.routers.wordpress.tls.certresolver: "default"
+      traefik.http.routers.wordpress.rule: 'Host(`${WORDPRESS_DOMAIN}`)'
+      traefik.http.routers.wordpress.tls: 'true'
+      traefik.http.routers.wordpress.tls.certresolver: 'default'
+      traefik.enable: 'true'
   # see https://github.com/EugenMayer/docker-image-traefik
   traefik:
     image: eugenmayer/traefik:2.x
@@ -18,6 +19,7 @@ services:
       TRAEFIK_ACME_CHALLENGE: 'http'
       TRAEFIK_HTTPS_ENABLE: 'only'
       TRAEFIK_DOCKER_ENABLE: 'true'
+      TRAEFIK_DOCKER_EXPOSEDBYDEFAULT: 'false'
     volumes:
       - certs:/mnt/certs
       - filestorage:/mnt/filestorage
