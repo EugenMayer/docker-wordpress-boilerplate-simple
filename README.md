@@ -1,3 +1,7 @@
+# Depreaction
+
+Eventhough this boilerlplate simply works and can be used, i'am no longer actively maintaining it, since we moved to a kubernetes based setup.
+
 # WAT
 
 This boilerplate focuses on providing a simple, less technical way to run wordpress on docker
