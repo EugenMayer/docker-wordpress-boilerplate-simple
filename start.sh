@@ -3,4 +3,4 @@
 set -e
 
 echo "starting wordpress"
-docker-compose up -d
+docker compose up -d

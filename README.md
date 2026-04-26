@@ -32,7 +32,7 @@ DB_PW=somepassword
 Now
 
 ```
-docker-compose up
+docker compose up
 
 # or
 

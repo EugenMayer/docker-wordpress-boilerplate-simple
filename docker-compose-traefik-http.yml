@@ -3,29 +3,34 @@ version: '3.3'
 services:
   wordpress:
     labels:
+      traefik.enable: 'true'
       traefik.http.routers.wordpress.rule: 'Host(`${WORDPRESS_DOMAIN}`,`www.${WORDPRESS_DOMAIN}`)'
       traefik.http.routers.wordpress.tls: 'true'
-      traefik.http.routers.wordpress.tls.certresolver: 'default'
-      traefik.enable: 'true'
-  # see https://github.com/EugenMayer/docker-image-traefik
-  traefik:
-    image: ghcr.io/eugenmayer/traefik:2.x
-    restart: always
-    ports:
-      - 80:8080
-      - 443:8443
-    environment:
-      TRAEFIK_ACME_ENABLE: 'true'
-      TRAEFIK_ACME_CHALLENGE: 'http'
-      TRAEFIK_HTTPS_ENABLE: 'only'
-      TRAEFIK_DOCKER_ENABLE: 'true'
-      TRAEFIK_DOCKER_EXPOSEDBYDEFAULT: 'false'
-    volumes:
-      - certs:/mnt/certs
-      - filestorage:/mnt/filestorage
-      - acme:/mnt/acme
-      # mount our docker socket so our docker container can be discovered
-      - /var/run/docker.sock:/var/run/docker.sock
+      traefik.http.routers.wordpress.tls.certresolver: 'letsencrypt'
+      traefik.http.routers.wordpress.service: "nextcloud"
+      traefik.http.services.wordpress.loadbalancer.server.scheme: "http"
+      traefik.http.services.wordpress.loadbalancer.server.port: "80"
+    traefik:
+      image: traefik:v3.6
+      command:
+        - "--api.insecure=true"
+        - "--providers.docker=true"
+        - "--providers.docker.exposedByDefault=false"
+        - "--entrypoints.web.address=:80"
+        - "--entrypoints.websecure.address=:443"
+        - "--certificatesResolvers.letsencrypt.acme.email=ssl@domain.tld"
+        - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+        - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
+      environment:
+        CF_DNS_API_TOKEN: ${TRAEFIK_CF_API_TOKEN}
+      ports:
+        # not needed, we use the dns challenge
+        - "80:80"
+        - "443:443"
+        - "127.0.0.1:8080:8080"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - letsencrypt:/letsencrypt
 volumes:
   certs:
   filestorage:

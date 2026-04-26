@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo "updating"
-docker-compose pull
+docker compose pull
 
 ./start.sh
