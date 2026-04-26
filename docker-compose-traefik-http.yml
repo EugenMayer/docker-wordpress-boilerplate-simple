@@ -4,7 +4,7 @@ services:
   wordpress:
     labels:
       traefik.enable: 'true'
-      traefik.http.routers.wordpress.rule: 'Host(`${WORDPRESS_DOMAIN}`,`www.${WORDPRESS_DOMAIN}`)'
+      traefik.http.routers.wordpress.rule: 'Host(`${WORDPRESS_DOMAIN}`) || Host(`www.${WORDPRESS_DOMAIN}`)'
       traefik.http.routers.wordpress.tls: 'true'
       traefik.http.routers.wordpress.tls.certresolver: 'letsencrypt'
       traefik.http.routers.wordpress.service: "wordpress"
@@ -21,8 +21,6 @@ services:
       - "--certificatesResolvers.letsencrypt.acme.email=${ACME_MAIL}"
       - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
-    environment:
-      CF_DNS_API_TOKEN: ${TRAEFIK_CF_API_TOKEN}
     ports:
       # not needed, we use the dns challenge
       - "80:80"
