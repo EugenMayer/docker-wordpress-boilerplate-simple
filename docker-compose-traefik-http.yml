@@ -32,6 +32,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - letsencrypt:/letsencrypt
 volumes:
-  certs:
-  filestorage:
-  acme:
+  letsencrypt:
