@@ -19,7 +19,7 @@ services:
        WORDPRESS_DB_PASSWORD: ${DB_PW}
 
    db:
-     image: mysql:8.4
+     image: mysql:9
      volumes:
        - db_data:/var/lib/mysql
        - ./data/site1/backups:/backups
