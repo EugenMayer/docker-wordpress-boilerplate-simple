@@ -18,7 +18,7 @@ services:
       - "--providers.docker.exposedByDefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesResolvers.letsencrypt.acme.email=ssl@domain.tld"
+      - "--certificatesResolvers.letsencrypt.acme.email=${ACME_MAIL}"
       - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"
     environment:
