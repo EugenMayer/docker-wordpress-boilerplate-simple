@@ -1,7 +1,8 @@
 FROM wordpress:latest
 
 # install the wordpress cli (wp-cli)
-RUN apt-get update \ 
+RUN apt-get update \
+ && apt-get upgrade -y \
  && apt-get install -y less \
  && pecl install apcu \
  && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
