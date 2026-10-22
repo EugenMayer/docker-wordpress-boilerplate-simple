@@ -4,7 +4,7 @@ services:
        - db
      # you can use either of this, ghcr.io/eugenmayer/wordpress includes the wp-cli
      #image: wordpress:latest
-     image: ghcr.io/eugenmayer/wordpress
+     image: ghcr.io/eugenmayer/wordpress:latest
      build:
        context: ./
      volumes:
